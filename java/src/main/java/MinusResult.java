@@ -9,7 +9,7 @@ public enum MinusResult {
 
     ;
 
-    private static final int WIN_FOR_PLAYER1 = 2;
+    private static final int MINIMUM_WIN_FOR_PLAYER1_NUMBER = 2;
 
     private final int key;
     private final String value;
@@ -20,7 +20,7 @@ public enum MinusResult {
     }
 
     public static MinusResult findByKey(int key) {
-        if (key >= WIN_FOR_PLAYER1) return TWO;
+        if (key >= MINIMUM_WIN_FOR_PLAYER1_NUMBER) return TWO;
         return EnumSet.allOf(MinusResult.class).stream()
                 .filter(minusResult -> minusResult.getKey() == key)
                 .findAny()
