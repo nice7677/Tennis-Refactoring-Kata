@@ -24,6 +24,11 @@ public enum Score {
                 .orElse(DEFAULT);
     }
 
+    public static String getScoreValue(int score) {
+        return Score.findByKey(score).getValue();
+    }
+
+
     public int getKey() {
         return key;
     }
