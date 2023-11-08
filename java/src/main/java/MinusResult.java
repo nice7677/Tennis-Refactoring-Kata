@@ -2,12 +2,14 @@ import java.util.EnumSet;
 
 public enum MinusResult {
 
-    ONE(1, "Advantage player1"),
-    TWO(2, "Win for player1"),
-    MINUS_ONE(-1, "Advantage player2"),
-    DEFAULT(99, "Win for player2"),
+    ONE(1, "Advantage %s"),
+    TWO(2, "Win for %s"),
+    MINUS_ONE(-1, "Advantage %s"),
+    DEFAULT(99, "Win for %s"),
 
-            ;
+    ;
+
+    private static final int WIN_FOR_PLAYER1 = 2;
 
     private final int key;
     private final String value;
@@ -18,10 +20,19 @@ public enum MinusResult {
     }
 
     public static MinusResult findByKey(int key) {
+        if (key >= WIN_FOR_PLAYER1) return TWO;
         return EnumSet.allOf(MinusResult.class).stream()
                 .filter(minusResult -> minusResult.getKey() == key)
                 .findAny()
                 .orElse(DEFAULT);
+    }
+
+    public static String getMinusResultValue(int score, String player1Name, String player2Name) {
+        MinusResult minusResult = MinusResult.findByKey(score);
+        if (minusResult == MINUS_ONE || minusResult == DEFAULT) {
+            return String.format(minusResult.getValue(), player2Name);
+        }
+        return String.format(minusResult.getValue(), player1Name);
     }
 
     public int getKey() {
