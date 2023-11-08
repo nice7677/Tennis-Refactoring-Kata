@@ -33,18 +33,18 @@ public class TennisGame1 implements TennisGame {
         StringBuilder sb = new StringBuilder();
 
         for (int i = START_GAME_ROUNDS; i < END_GAME_ROUNDS; i++) {
-            sb.append(TempScore.getTempScoreValue(getTempScore(i, sb)));
+            addDashBar(i, sb);
+            sb.append(TempScore.getTempScoreValue(getTempScore(i)));
         }
 
         return sb.toString();
 
     }
 
-    private int getTempScore(int round, StringBuilder sb) {
+    private int getTempScore(int round) {
         if (round == START_GAME_ROUNDS) {
             return mScore1;
         }
-        addDashBar(round, sb);
         return mScore2;
     }
 
